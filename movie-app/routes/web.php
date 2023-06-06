@@ -1,5 +1,8 @@
 <?php
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,24 +17,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/index', function () {
     return view('index');
 });
+Route::get('/', [HomeController::class, 'index']);
+// Movies
 
-Route::get('/movies', function () {
-    return view('movies/index');
-});
+Route::get('/movies', [MovieController::class, 'index']);
+Route::get('/movies/create', [MovieController::class, 'create']);
+Route::post('/movies', [MovieController::class, 'store']);
+Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
+Route::get('/movies/{movie}/edit', [MovieController::class, 'edit']);
+Route::put('/movies/{movie}', [MovieController::class, 'update']);
 
-Route::get('/genres', function () {
-    return view('genres/index');
-});
+// Genres
 
-Route::get('/reviews', function () {
-    return view('reviews/index');
-});
+Route::get('/genres', [GenreController::class, 'index']);
+Route::get('/genres/create', [GenreController::class, 'create']);
+
+// Reviews
+Route::get('/reviews', [ReviewController::class, 'index']);
+
 
 Route::get('/users', function () {
     return view('users');

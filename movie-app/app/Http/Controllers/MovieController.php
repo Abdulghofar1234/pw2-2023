@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Movie;
+use App\Models\Genre;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -12,7 +15,9 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        $movies = Movie::all();
+        return view('movies/index', compact('movies'));
+
     }
 
     /**
@@ -20,7 +25,8 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        $genres = Genre::all();
+        return view('movies.create', compact('genres'));
     }
 
     /**
@@ -28,9 +34,20 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+    $validatedData = $request->validate([
+        'judul' => 'required',
+        'poster' => 'required',
+        'genre_id' => 'required',
+        'negara' => 'required',
+        'tahun' => 'required|integer',
+        'rating' => 'required|numeric',
+    ]);
 
+    Movie::create($validatedData);
+
+    return redirect('/movies')->with('success', 'Movie added successfully!');
+    }
+    
     /**
      * Display the specified resource.
      */
@@ -44,7 +61,9 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        //
+        $genres = Genre::all();
+
+        return view('movies.edit', compact('movie', 'genres'));
     }
 
     /**
@@ -52,7 +71,18 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        //
+        $validatedData = $request->validate([
+            'judul' => 'required',
+            'poster' => 'required',
+            'genre_id' => 'required',
+            'negara' => 'required',
+            'tahun' => 'required|integer',
+            'rating' => 'required|numeric',
+        ]);
+
+        $movie->update($validatedData);
+
+        return redirect('/movies')->with('success', 'Movie updated successfully!');
     }
 
     /**
@@ -60,6 +90,8 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+
+        return redirect('/movies')->with('success', 'Movie deleted Successfully');
     }
 }
