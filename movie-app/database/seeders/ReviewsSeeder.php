@@ -16,8 +16,7 @@ class ReviewsSeeder extends Seeder
             'no' => '1',
             'film' => 'The Shawshank redemption',
             'user' => 'image.png',
-            'ranting' => 9.8,
-            'review' => 'USA',
+            'rating' => 9.8,
             'tanggal' => 1994,
         ]);
     }

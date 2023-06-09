@@ -30,11 +30,10 @@ Route::resource('/movies', MovieController::class);
 
 // Genres
 
-Route::get('/genres', [GenreController::class, 'index']);
-Route::get('/genres/create', [GenreController::class, 'create']);
+Route::resource('/genres', GenreController::class);
 
 // Reviews
-Route::get('/reviews', [ReviewController::class, 'index']);
+Route::resource('/reviews', ReviewController::class);
 
 
 Route::get('/users', function () {

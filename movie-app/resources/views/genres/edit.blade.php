@@ -5,7 +5,7 @@
     <div class="mb-4">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-            <li class="breadcrumb-item active">Genres</li>
+            <li class="breadcrumb-item active">Movies</li>
         </ol>
     </div>
     @if ($errors->any())
@@ -20,20 +20,19 @@
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Genres Data
+            Edit Data
         </div>
         <div class="card-body">
-            <form method="POST" action="/genres">
+            <form method="POST" action="/genres/{{ $genre->id }}">
                 @csrf
-                <div>
-                    <label for="nama">nama</label>
-                    <input type="text" id="nama" name="nama">
-                </div>
-                <div>
-                    <label for="deskripsi">deskripsi</label>
-                    <input type="text" id="deskripsi" name="deskripsi">
-                </div>
-                <button type="submit">Add</button>
+                @method('PUT')
+                <label for="nama">Nama:</label><br>
+                <input type="text" id="genre" name="nama" value="{{ $genre->nama }}"><br><br>
+
+                <label for="deskripsi">Deskripsi:</label><br>
+                <input type="text" id="deskripsi" name="deskripsi" value="{{ $genre->deskripsi }}"><br><br>
+
+                <input type="submit" value="Update Movie">
             </form>
         </div>
     </div>

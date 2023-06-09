@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Movie;
 use App\Models\Genre;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -34,9 +34,16 @@ class GenreController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $validatedData = $request->validate([
+        'nama' => 'required',
+        'deskripsi' => 'required',
+    ]);
+
+    Genre::create($validatedData);
+
+    return redirect('/genres')->with('success', 'Genre added successfully!');
+}
 
     /**
      * Display the specified resource.
@@ -51,7 +58,9 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
-        //
+        $genres = Genre::all();
+
+        return view('genres.edit', compact('genre', 'genres'));
     }
 
     /**
@@ -59,14 +68,23 @@ class GenreController extends Controller
      */
     public function update(Request $request, Genre $genre)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        $genre->update($validatedData);
+
+        return redirect('/genres')->with('success', 'Genre updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Genre $genre)
-    {
-        //
-    }
+{
+    $genre->delete();
+
+    return redirect('/genres')->with('success', 'Genre deleted successfully!');
+}
 }

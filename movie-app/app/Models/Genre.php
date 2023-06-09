@@ -9,36 +9,10 @@ class Genre extends Model
 {
     use HasFactory;
 
-    protected $genres = [
-        [
-            'no' => 1,
-            'genre' => 'Samson Betawi',
-            'deskripsi' => 'image.png',
-        ],
-        [
-            'no' => 2,
-            'genre' => 'Batman',
-            'deskripsi' => 'image.png',
-        ],
-        [
-            'no' => 3,
-            'genre' => 'Tsubasa',
-            'deskripsi' => 'image.png',
-        ],
-        [
-            'no' => 4,
-            'genre' => 'Boruta',
-            'deskripsi' => 'image.png',
-        ],
-        [
-            'no' => 5,
-            'genre' => 'Cekshow',
-            'deskripsi' => 'image.png',
-        ],
-    ];
+    protected $fillable = ['nama', 'deskripsi'];
 
-    public function getAllMovies()
+    public function genre()
     {
-        return $this->genres;
+        return $this->belongsTo(Genre::class, 'deskripsi');
     }
 }
