@@ -32,7 +32,7 @@
                 <label for="deskripsi">Deskripsi:</label><br>
                 <input type="text" id="deskripsi" name="deskripsi" value="{{ $genre->deskripsi }}"><br><br>
 
-                <input type="submit" value="Update Movie">
+                <input type="submit" value="Update Genre">
             </form>
         </div>
     </div>
