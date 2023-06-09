@@ -1,9 +1,12 @@
 <?php
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MovieController;
-use App\Http\Controllers\GenreController;
-use App\Http\Controllers\ReviewController;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\GenresController;
+use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\UsersController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,28 +23,20 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/index', function () {
-    return view('index');
-});
-Route::get('/', [HomeController::class, 'index']);
-// Movies
-
 Route::get('/movies', [MovieController::class, 'index']);
-Route::get('/movies/create', [MovieController::class, 'create']);
-Route::post('/movies', [MovieController::class, 'store']);
+Route::get('movies/create', [MovieController::class, 'create']);
+Route::post('movies', [MovieController::class, 'store']);
 Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
-Route::get('/movies/{movie}/edit', [MovieController::class, 'edit']);
-Route::put('/movies/{movie}', [MovieController::class, 'update']);
 
-// Genres
+Route::get('/genres', [GenresController::class, 'index']);
+Route::get('/genres/create', [GenresController::class, 'create']);
+Route::post('/genres', [GenresController::class, 'store']);
+Route::delete('/genres/{genres}', [GenresController::class, 'destroy']);
 
-Route::get('/genres', [GenreController::class, 'index']);
-Route::get('/genres/create', [GenreController::class, 'create']);
+Route::get('/reviews', [ReviewsController::class, 'index']);
+Route::get('/reviews/create', [ReviewsController::class, 'create']);
+Route::post('reviews', [ReviewsController::class, 'store']);
+Route::delete('/reviews/{reviews}', [ReviewsController::class, 'destroy']);
 
-// Reviews
-Route::get('/reviews', [ReviewController::class, 'index']);
 
-
-Route::get('/users', function () {
-    return view('users');
-});
+Route::get('/users', [UsersController::class, 'index']);
